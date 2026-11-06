@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<defs><linearGradient id="s" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#c6543e"/><stop offset="1" stop-color="#963828"/></linearGradient></defs>
+<rect width="64" height="64" rx="14" fill="#faf6f1"/>
+<rect x="10" y="10" width="44" height="44" rx="11" fill="url(#s)"/>
+<rect x="14.5" y="14.5" width="35" height="35" rx="8" fill="none" stroke="#faeee6" stroke-opacity=".85" stroke-width="1.6"/>
+<text x="32" y="43.5" font-family="STSong, Songti SC, serif" font-size="26" fill="#faeee6" text-anchor="middle">军</text>
+</svg>
