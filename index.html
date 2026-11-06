@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<title>狗头军师</title>
+<meta name="description" content="先接住情绪，再分析关系，最后给能执行的建议。">
+<meta name="theme-color" content="#FAF6F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14100E" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="狗头军师">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="color-scheme" content="light dark">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" href="./icons/icon-180.png">
+<link rel="icon" href="./icons/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="stylesheet" href="./assets/app.css">
+</head>
+<body>
+<div id="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="seal" aria-hidden="true">军</span>
+      <div class="brand-text">
+        <h1>狗头军师</h1>
+        <p id="brandSub">先接住情绪，再一起想办法</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button id="btnProfile" class="icon-btn" type="button" aria-label="关系档案">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-3.9 0-7 2.2-7 4.9V21h14v-2.1c0-2.7-3.1-4.9-7-4.9Z"/></svg>
+      </button>
+      <button id="btnSettings" class="icon-btn" type="button" aria-label="设置">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4Zm8-3.2c0-.6-.1-1.2-.2-1.7l1.7-1.3-1.7-3-2 .8a7.9 7.9 0 0 0-2.9-1.7L14.6 3H9.4l-.3 2.1a7.9 7.9 0 0 0-2.9 1.7l-2-.8-1.7 3 1.7 1.3a8.6 8.6 0 0 0 0 3.4L2.5 15l1.7 3 2-.8a7.9 7.9 0 0 0 2.9 1.7l.3 2.1h5.2l.3-2.1a7.9 7.9 0 0 0 2.9-1.7l2 .8 1.7-3-1.7-1.3c.1-.5.2-1.1.2-1.7Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="chat" class="chat">
+    <section id="empty" class="empty">
+      <div class="empty-emblem" aria-hidden="true">
+        <span>军</span>
+      </div>
+      <h2>先把情绪接住，<br>再一起想办法。</h2>
+      <p class="empty-sub">说说你的处境、贴一段聊天记录，或者只讲一句「对方最近回得很慢」。我不会替你读心，但会帮你把事实、猜测和你真正能做的选择分开。</p>
+
+      <div class="quick-grid">
+        <button class="quick-card" data-quick="story" type="button">
+          <span class="q-title">讲讲我的情况</span>
+          <span class="q-desc">从情绪开始，慢慢说</span>
+        </button>
+        <button class="quick-card" data-quick="reply" type="button">
+          <span class="q-title">这句话怎么回</span>
+          <span class="q-desc">给我一条能直接发的</span>
+        </button>
+        <button class="quick-card" data-quick="profile" type="button">
+          <span class="q-title">建立关系档案</span>
+          <span class="q-desc">MBTI、评分、目标</span>
+        </button>
+        <button class="quick-card" data-quick="decide" type="button">
+          <span class="q-title">继续还是退出</span>
+          <span class="q-desc">把账算清楚再决定</span>
+        </button>
+      </div>
+
+      <p class="empty-foot">档案与对话只保存在这台手机上 · 建议仅供参考</p>
+    </section>
+    <div id="messages" class="messages"></div>
+  </main>
+
+  <div id="offlineBar" class="offline-bar" hidden>当前没有网络，军师暂时无法回应</div>
+
+  <footer class="composer-wrap">
+    <div id="chips" class="chips">
+      <button class="chip" data-chip="analyze" type="button">分析这段聊天</button>
+      <button class="chip" data-chip="reply" type="button">这句话怎么回</button>
+      <button class="chip" data-chip="invite" type="button">怎么约她</button>
+      <button class="chip" data-chip="cold" type="button">我们在冷战</button>
+      <button class="chip" data-chip="exit" type="button">要不要退出</button>
+    </div>
+    <form id="composer" class="composer" autocomplete="off">
+      <textarea id="input" rows="1" placeholder="说点什么，或者贴一段聊天记录…" enterkeyhint="send" aria-label="输入消息"></textarea>
+      <button id="btnSend" class="send" type="submit" aria-label="发送">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.3 4.3a1 1 0 0 1 1.4 0l6 6a1 1 0 0 1-1.4 1.4L13 7.4V19a1 1 0 1 1-2 0V7.4l-4.3 4.3a1 1 0 0 1-1.4-1.4l6-6Z"/></svg>
+      </button>
+      <button id="btnStop" class="send stop" type="button" hidden aria-label="停止生成">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2"/></svg>
+      </button>
+    </form>
+    <p class="fineprint">内容仅存本机浏览器 · 军师会先接情绪，再给判断</p>
+  </footer>
+</div>
+
+<div id="scrim" class="scrim" hidden></div>
+
+<section id="sheetSettings" class="sheet" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" hidden>
+  <div class="sheet-grab" aria-hidden="true"></div>
+  <div class="sheet-head">
+    <h2 id="settingsTitle">设置</h2>
+    <button class="link-btn" data-close type="button">完成</button>
+  </div>
+  <div class="sheet-body">
+    <div id="connState" class="conn-state">
+      <span class="dot"></span><span id="connText">正在检查模型连接…</span>
+    </div>
+
+    <label class="field">
+      <span class="field-label">接口地址 <em>Base URL</em></span>
+      <input id="cfgBase" type="url" inputmode="url" spellcheck="false" placeholder="https://…/v1">
+    </label>
+
+    <label class="field">
+      <span class="field-label">模型 <em>Model</em></span>
+      <div class="field-row">
+        <input id="cfgModel" type="text" list="modelList" spellcheck="false" placeholder="deepseek-v4.1-flash">
+        <button id="btnFetchModels" class="ghost-btn" type="button">拉取</button>
+      </div>
+      <datalist id="modelList"></datalist>
+    </label>
+
+    <label class="field">
+      <span class="field-label">API Key <em>只存在这台手机</em></span>
+      <div class="field-row">
+        <input id="cfgKey" type="password" spellcheck="false" placeholder="sk-…" autocomplete="off">
+        <button id="btnEye" class="ghost-btn" type="button">显示</button>
+      </div>
+    </label>
+
+    <div class="field">
+      <span class="field-label">温度 <em id="tempVal">0.7</em></span>
+      <input id="cfgTemp" type="range" min="0" max="1.3" step="0.1">
+    </div>
+
+    <label class="switch-row">
+      <span>显示思考过程</span>
+      <input id="cfgReason" type="checkbox" class="switch">
+    </label>
+
+    <div class="divider"><span>配置码</span></div>
+    <p class="hint">换手机时，把这里的配置码复制过去粘贴即可，免去手填 Key。</p>
+    <div class="field-row">
+      <button id="btnCopyCfg" class="ghost-btn wide" type="button">复制配置码</button>
+      <button id="btnImportCfg" class="ghost-btn wide" type="button">粘贴导入</button>
+    </div>
+
+    <div class="divider"><span>数据</span></div>
+    <div class="field-row">
+      <button id="btnMemory" class="ghost-btn wide" type="button">长期记忆</button>
+      <button id="btnClear" class="ghost-btn wide danger" type="button">清空对话</button>
+    </div>
+
+    <p class="about">狗头军师 · 移动版 v1.0<br>技能内容来自 GitHub 开源项目 goutoujunshi（MIT）。档案、对话、Key 均保存在本机浏览器，不会上传到任何服务器。</p>
+  </div>
+</section>
+
+<section id="sheetProfile" class="sheet" role="dialog" aria-modal="true" aria-labelledby="profileTitle" hidden>
+  <div class="sheet-grab" aria-hidden="true"></div>
+  <div class="sheet-head">
+    <h2 id="profileTitle">关系档案</h2>
+    <button class="link-btn" data-close type="button">完成</button>
+  </div>
+  <div class="sheet-body">
+    <p class="hint">填了会自动带进每次对话；不填也能直接在聊天里讲故事，军师会边聊边问。</p>
+
+    <div class="divider"><span>你</span></div>
+    <div class="grid-2">
+      <label class="field"><span class="field-label">MBTI</span><input id="pMeMbti" type="text" placeholder="INFP" spellcheck="false"></label>
+      <label class="field"><span class="field-label">主观评分 0–100</span><input id="pMeScore" type="number" min="0" max="100" placeholder="75"></label>
+    </div>
+    <div class="grid-2">
+      <label class="field"><span class="field-label">优势</span><input id="pMeStrong" type="text" placeholder="细腻、真诚"></label>
+      <label class="field"><span class="field-label">短板</span><input id="pMeWeak" type="text" placeholder="想太多、不敢开话题"></label>
+    </div>
+
+    <div class="divider"><span>对象 A</span></div>
+    <div class="grid-2">
+      <label class="field"><span class="field-label">代号</span><input id="pAMbtiCode" type="text" placeholder="A / 小鹿" spellcheck="false"></label>
+      <label class="field"><span class="field-label">MBTI</span><input id="pAMbti" type="text" placeholder="ENFJ" spellcheck="false"></label>
+    </div>
+    <div class="grid-2">
+      <label class="field"><span class="field-label">主观评分 0–100</span><input id="pAScore" type="number" min="0" max="100" placeholder="80"></label>
+      <label class="field"><span class="field-label">当前关系</span><input id="pARel" type="text" placeholder="暧昧 / 同事"></label>
+    </div>
+
+    <div class="divider"><span>对象 B（可选）</span></div>
+    <div class="grid-2">
+      <label class="field"><span class="field-label">代号</span><input id="pBMbtiCode" type="text" placeholder="B" spellcheck="false"></label>
+      <label class="field"><span class="field-label">MBTI</span><input id="pBMbti" type="text" placeholder="—" spellcheck="false"></label>
+    </div>
+    <div class="grid-2">
+      <label class="field"><span class="field-label">主观评分 0–100</span><input id="pBScore" type="number" min="0" max="100" placeholder="—"></label>
+      <label class="field"><span class="field-label">当前关系</span><input id="pBRel" type="text" placeholder="—"></label>
+    </div>
+
+    <div class="divider"><span>当前状态</span></div>
+    <label class="field">
+      <span class="field-label">目标</span>
+      <select id="pGoal">
+        <option value="">未定</option>
+        <option>推进</option>
+        <option>确认关系</option>
+        <option>修复</option>
+        <option>比较选择</option>
+        <option>退出</option>
+      </select>
+    </label>
+    <div class="field">
+      <span class="field-label">情绪强度 <em id="emoVal">5 / 10</em></span>
+      <input id="pEmo" type="range" min="0" max="10" step="1" value="5">
+    </div>
+    <label class="field">
+      <span class="field-label">经过 / 最近发生了什么</span>
+      <textarea id="pNotes" rows="4" placeholder="认识方式、多久、最近三件关键的事…"></textarea>
+    </label>
+
+    <div class="field-row">
+      <button id="btnSaveProfile" class="primary-btn" type="button">保存档案</button>
+      <button id="btnResetProfile" class="ghost-btn" type="button">清空</button>
+    </div>
+  </div>
+</section>
+
+<section id="sheetMemory" class="sheet" role="dialog" aria-modal="true" aria-labelledby="memoryTitle" hidden>
+  <div class="sheet-grab" aria-hidden="true"></div>
+  <div class="sheet-head">
+    <h2 id="memoryTitle">长期记忆</h2>
+    <button class="link-btn" data-close type="button">完成</button>
+  </div>
+  <div class="sheet-body">
+    <p class="hint">只记你允许记的事，随时可以删。军师每次对话会带上这些内容，用来保持前后一致。</p>
+    <form id="memForm" class="field-row">
+      <input id="memInput" type="text" placeholder="例如：她说过不喜欢被连续追问" maxlength="120">
+      <button class="ghost-btn" type="submit">添加</button>
+    </form>
+    <ul id="memList" class="mem-list"></ul>
+    <p id="memEmpty" class="hint">还没有记录。同意之后，可以把重要背景写进来。</p>
+  </div>
+</section>
+
+<div id="toast" class="toast" role="status" hidden></div>
+
+<script src="./assets/skill-core.js"></script>
+<script src="./assets/app.js"></script>
+</body>
+</html>
